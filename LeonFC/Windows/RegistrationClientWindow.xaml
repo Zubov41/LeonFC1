@@ -153,6 +153,7 @@
                     Width="250"
                     Height="30"
                     Click="BtnAddClient_Click"/>
+            
 
 
         </StackPanel>
