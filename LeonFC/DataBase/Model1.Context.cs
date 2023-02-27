@@ -15,10 +15,10 @@ namespace LeonFC.DataBase
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class FitnesClubLeonEntities : DbContext
+    public partial class FitnesClubLeonEntities1 : DbContext
     {
-        public FitnesClubLeonEntities()
-            : base("name=FitnesClubLeonEntities")
+        public FitnesClubLeonEntities1()
+            : base("name=FitnesClubLeonEntities1")
         {
         }
     

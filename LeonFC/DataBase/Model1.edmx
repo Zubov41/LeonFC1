@@ -4,20 +4,24 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище FitnesClubLeonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище FitnesClubLeonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="IDClient" />
           </Key>
           <Property Name="IDClient" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="100" Nullable="false" />
-          <Property Name="patronymic" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="DateOfBirth" Type="date" Nullable="false" />
-          <Property Name="Phone" Type="nchar" MaxLength="12" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="PassportSerias" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PassportNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IDGender" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Phone" Type="nchar" MaxLength="12" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="PassportSeries" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassportNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDGender" Type="int" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Login" Type="nchar" MaxLength="50" />
+          <Property Name="Password" Type="nchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Emplovee">
           <Key>
@@ -61,8 +65,11 @@
           </Key>
           <Property Name="IDService" Type="int" Nullable="false" />
           <Property Name="NameService" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PriceService" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PriceService" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="DateService" Type="date" Nullable="false" />
+          <Property Name="TimeService" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -95,7 +102,7 @@
           <Property Name="IDService" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Client_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -106,7 +113,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_Client">
+        <Association Name="FK_Order_Client2">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderService_Order">
+        <Association Name="FK_OrderService_Order1">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
           <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,11 +145,11 @@
               <PropertyRef Name="IDOrder" />
             </Principal>
             <Dependent Role="OrderService">
-              <PropertyRef Name="IDService" />
+              <PropertyRef Name="IDOrder" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderService_Service">
+        <Association Name="FK_OrderService_Service1">
           <End Role="Service" Type="Self.Service" Multiplicity="1" />
           <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,7 +161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TrainerService_Service">
+        <Association Name="FK_TrainerService_Service1">
           <End Role="Service" Type="Self.Service" Multiplicity="1" />
           <End Role="TrainerService" Type="Self.TrainerService" Multiplicity="*" />
           <ReferentialConstraint>
@@ -234,7 +241,7 @@
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Client" EntitySet="Client" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
+          <AssociationSet Name="FK_Order_Client2" Association="Self.FK_Order_Client2">
             <End Role="Client" EntitySet="Client" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
@@ -242,15 +249,15 @@
             <End Role="Emplovee" EntitySet="Emplovee" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderService_Order" Association="Self.FK_OrderService_Order">
+          <AssociationSet Name="FK_OrderService_Order1" Association="Self.FK_OrderService_Order1">
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderService" EntitySet="OrderService" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderService_Service" Association="Self.FK_OrderService_Service">
+          <AssociationSet Name="FK_OrderService_Service1" Association="Self.FK_OrderService_Service1">
             <End Role="Service" EntitySet="Service" />
             <End Role="OrderService" EntitySet="OrderService" />
           </AssociationSet>
-          <AssociationSet Name="FK_TrainerService_Service" Association="Self.FK_TrainerService_Service">
+          <AssociationSet Name="FK_TrainerService_Service1" Association="Self.FK_TrainerService_Service1">
             <End Role="Service" EntitySet="Service" />
             <End Role="TrainerService" EntitySet="TrainerService" />
           </AssociationSet>
@@ -259,197 +266,11 @@
             <End Role="TrainerService" EntitySet="TrainerService" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FitnesClubLeonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="IDClient" />
-          </Key>
-          <Property Name="IDClient" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PassportSerias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PassportNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IDGender" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Client" FromRole="Client" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="Emplovee">
-          <Key>
-            <PropertyRef Name="IDEmployee" />
-          </Key>
-          <Property Name="IDEmployee" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Emplovee1" FromRole="Emplovee" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="Gender">
-          <Key>
-            <PropertyRef Name="IDGender" />
-          </Key>
-          <Property Name="IDGender" Type="Int32" Nullable="false" />
-          <Property Name="NameGender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
-        </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="IDOrder" />
-          </Key>
-          <Property Name="IDOrder" Type="Int32" Nullable="false" />
-          <Property Name="IDClient" Type="Int32" Nullable="false" />
-          <Property Name="IDEmployee" Type="Int32" Nullable="false" />
-          <Property Name="DateOrder" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Order_Client" FromRole="Order" ToRole="Client" />
-          <NavigationProperty Name="Emplovee" Relationship="Self.FK_Order_Emplovee1" FromRole="Order" ToRole="Emplovee" />
-          <NavigationProperty Name="OrderService" Relationship="Self.FK_OrderService_Order" FromRole="Order" ToRole="OrderService" />
-        </EntityType>
-        <EntityType Name="Service">
-          <Key>
-            <PropertyRef Name="IDService" />
-          </Key>
-          <Property Name="IDService" Type="Int32" Nullable="false" />
-          <Property Name="NameService" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PriceService" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateService" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="OrderService" Relationship="Self.FK_OrderService_Service" FromRole="Service" ToRole="OrderService" />
-          <NavigationProperty Name="Trainer" Relationship="Self.TrainerService" FromRole="Service" ToRole="Trainer" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Trainer">
-          <Key>
-            <PropertyRef Name="IDTrainer" />
-          </Key>
-          <Property Name="IDTrainer" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="WorkingHours" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="WorkExperience" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="Self.TrainerService" FromRole="Trainer" ToRole="Service" />
-        </EntityType>
-        <EntityType Name="OrderService">
-          <Key>
-            <PropertyRef Name="IDService" />
-            <PropertyRef Name="IDOrder" />
-            <PropertyRef Name="Quantity" />
-          </Key>
-          <Property Name="IDService" Type="Int32" Nullable="false" />
-          <Property Name="IDOrder" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_OrderService_Order" FromRole="OrderService" ToRole="Order" />
-          <NavigationProperty Name="Service" Relationship="Self.FK_OrderService_Service" FromRole="OrderService" ToRole="Service" />
-        </EntityType>
-        <Association Name="FK_Client_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Gender">
-              <PropertyRef Name="IDGender" />
-            </Principal>
-            <Dependent Role="Client">
-              <PropertyRef Name="IDGender" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="IDClient" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="IDClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Emplovee1">
-          <End Role="Emplovee" Type="Self.Emplovee" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Emplovee">
-              <PropertyRef Name="IDEmployee" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="IDEmployee" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderService_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="IDOrder" />
-            </Principal>
-            <Dependent Role="OrderService">
-              <PropertyRef Name="IDService" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderService_Service">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="IDService" />
-            </Principal>
-            <Dependent Role="OrderService">
-              <PropertyRef Name="IDService" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TrainerService">
-          <End Role="Service" Type="Self.Service" Multiplicity="*" />
-          <End Role="Trainer" Type="Self.Trainer" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="FitnesClubLeonEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Client" EntityType="Self.Client" />
-          <EntitySet Name="Emplovee" EntityType="Self.Emplovee" />
-          <EntitySet Name="Gender" EntityType="Self.Gender" />
-          <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="Service" EntityType="Self.Service" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Trainer" EntityType="Self.Trainer" />
-          <EntitySet Name="OrderService" EntityType="Self.OrderService" />
-          <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
-            <End Role="Gender" EntitySet="Gender" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Emplovee1" Association="Self.FK_Order_Emplovee1">
-            <End Role="Emplovee" EntitySet="Emplovee" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderService_Order" Association="Self.FK_OrderService_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderService" EntitySet="OrderService" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderService_Service" Association="Self.FK_OrderService_Service">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="OrderService" EntitySet="OrderService" />
-          </AssociationSet>
-          <AssociationSet Name="TrainerService" Association="Self.TrainerService">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="Trainer" EntitySet="Trainer" />
-          </AssociationSet>
+        <EntityContainer Name="FitnesClubLeonEntities1" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -480,7 +301,39 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-        </EntityContainer>
+          <EntitySet Name="Client" EntityType="FitnesClubLeonModel.Client" />
+          <EntitySet Name="Emplovee" EntityType="FitnesClubLeonModel.Emplovee" />
+          <EntitySet Name="Gender" EntityType="FitnesClubLeonModel.Gender" />
+          <EntitySet Name="Order" EntityType="FitnesClubLeonModel.Order" />
+          <EntitySet Name="Service" EntityType="FitnesClubLeonModel.Service" />
+          <EntitySet Name="sysdiagrams" EntityType="FitnesClubLeonModel.sysdiagrams" />
+          <EntitySet Name="Trainer" EntityType="FitnesClubLeonModel.Trainer" />
+          <EntitySet Name="OrderService" EntityType="FitnesClubLeonModel.OrderService" />
+          <AssociationSet Name="FK_Client_Gender" Association="FitnesClubLeonModel.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Client2" Association="FitnesClubLeonModel.FK_Order_Client2">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Emplovee1" Association="FitnesClubLeonModel.FK_Order_Emplovee1">
+            <End Role="Emplovee" EntitySet="Emplovee" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderService_Order1" Association="FitnesClubLeonModel.FK_OrderService_Order1">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderService_Service1" Association="FitnesClubLeonModel.FK_OrderService_Service1">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="TrainerService" Association="FitnesClubLeonModel.TrainerService">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Trainer" EntitySet="Trainer" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -492,103 +345,172 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-      </Schema>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDClient" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PassportSeries" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDGender" Type="Int32" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Gender" Relationship="FitnesClubLeonModel.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
+          <NavigationProperty Name="Order" Relationship="FitnesClubLeonModel.FK_Order_Client2" FromRole="Client" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Emplovee">
+          <Key>
+            <PropertyRef Name="IDEmployee" />
+          </Key>
+          <Property Name="IDEmployee" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="FitnesClubLeonModel.FK_Order_Emplovee1" FromRole="Emplovee" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="IDGender" />
+          </Key>
+          <Property Name="IDGender" Type="Int32" Nullable="false" />
+          <Property Name="NameGender" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="FitnesClubLeonModel.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="Int32" Nullable="false" />
+          <Property Name="IDClient" Type="Int32" Nullable="false" />
+          <Property Name="IDEmployee" Type="Int32" Nullable="false" />
+          <Property Name="DateOrder" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Client" Relationship="FitnesClubLeonModel.FK_Order_Client2" FromRole="Order" ToRole="Client" />
+          <NavigationProperty Name="Emplovee" Relationship="FitnesClubLeonModel.FK_Order_Emplovee1" FromRole="Order" ToRole="Emplovee" />
+          <NavigationProperty Name="OrderService" Relationship="FitnesClubLeonModel.FK_OrderService_Order1" FromRole="Order" ToRole="OrderService" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="IDService" />
+          </Key>
+          <Property Name="IDService" Type="Int32" Nullable="false" />
+          <Property Name="NameService" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PriceService" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="DateService" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TimeService" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="OrderService" Relationship="FitnesClubLeonModel.FK_OrderService_Service1" FromRole="Service" ToRole="OrderService" />
+          <NavigationProperty Name="Trainer" Relationship="FitnesClubLeonModel.TrainerService" FromRole="Service" ToRole="Trainer" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="IDTrainer" />
+          </Key>
+          <Property Name="IDTrainer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="WorkingHours" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="WorkExperience" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Service" Relationship="FitnesClubLeonModel.TrainerService" FromRole="Trainer" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="OrderService">
+          <Key>
+            <PropertyRef Name="IDService" />
+            <PropertyRef Name="IDOrder" />
+            <PropertyRef Name="Quantity" />
+          </Key>
+          <Property Name="IDService" Type="Int32" Nullable="false" />
+          <Property Name="IDOrder" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="FitnesClubLeonModel.FK_OrderService_Order1" FromRole="OrderService" ToRole="Order" />
+          <NavigationProperty Name="Service" Relationship="FitnesClubLeonModel.FK_OrderService_Service1" FromRole="OrderService" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_Client_Gender">
+          <End Type="FitnesClubLeonModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="FitnesClubLeonModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="IDGender" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IDGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Client2">
+          <End Type="FitnesClubLeonModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="FitnesClubLeonModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Emplovee1">
+          <End Type="FitnesClubLeonModel.Emplovee" Role="Emplovee" Multiplicity="1" />
+          <End Type="FitnesClubLeonModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emplovee">
+              <PropertyRef Name="IDEmployee" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IDEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderService_Order1">
+          <End Type="FitnesClubLeonModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="FitnesClubLeonModel.OrderService" Role="OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderService_Service1">
+          <End Type="FitnesClubLeonModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="FitnesClubLeonModel.OrderService" Role="OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="IDService" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IDService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TrainerService">
+          <End Type="FitnesClubLeonModel.Service" Role="Service" Multiplicity="*" />
+          <End Type="FitnesClubLeonModel.Trainer" Role="Trainer" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище FitnesClubLeonModelContainer" CdmEntityContainer="FitnesClubLeonEntities">
-          <EntitySetMapping Name="Client">
-            <EntityTypeMapping TypeName="FitnesClubLeonModel.Client">
-              <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PassportSerias" ColumnName="PassportSerias" />
-                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
-                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Emplovee">
-            <EntityTypeMapping TypeName="FitnesClubLeonModel.Emplovee">
-              <MappingFragment StoreEntitySet="Emplovee">
-                <ScalarProperty Name="IDEmployee" ColumnName="IDEmployee" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Gender">
-            <EntityTypeMapping TypeName="FitnesClubLeonModel.Gender">
-              <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
-                <ScalarProperty Name="NameGender" ColumnName="NameGender" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Order">
-            <EntityTypeMapping TypeName="FitnesClubLeonModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
-                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
-                <ScalarProperty Name="IDEmployee" ColumnName="IDEmployee" />
-                <ScalarProperty Name="DateOrder" ColumnName="DateOrder" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Service">
-            <EntityTypeMapping TypeName="FitnesClubLeonModel.Service">
-              <MappingFragment StoreEntitySet="Service">
-                <ScalarProperty Name="IDService" ColumnName="IDService" />
-                <ScalarProperty Name="NameService" ColumnName="NameService" />
-                <ScalarProperty Name="PriceService" ColumnName="PriceService" />
-                <ScalarProperty Name="DateService" ColumnName="DateService" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="FitnesClubLeonModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Trainer">
-            <EntityTypeMapping TypeName="FitnesClubLeonModel.Trainer">
-              <MappingFragment StoreEntitySet="Trainer">
-                <ScalarProperty Name="IDTrainer" ColumnName="IDTrainer" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
-                <ScalarProperty Name="WorkExperience" ColumnName="WorkExperience" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderService">
-            <EntityTypeMapping TypeName="FitnesClubLeonModel.OrderService">
-              <MappingFragment StoreEntitySet="OrderService">
-                <ScalarProperty Name="IDService" ColumnName="IDService" />
-                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="TrainerService" TypeName="FitnesClubLeonModel.TrainerService" StoreEntitySet="TrainerService">
-            <EndProperty Name="Service">
-              <ScalarProperty Name="IDService" ColumnName="IDService" />
-            </EndProperty>
-            <EndProperty Name="Trainer">
-              <ScalarProperty Name="IDTrainer" ColumnName="IDTrainer" />
-            </EndProperty>
-          </AssociationSetMapping>
+        <EntityContainerMapping StorageEntityContainer="Хранилище FitnesClubLeonModelContainer" CdmEntityContainer="FitnesClubLeonEntities1">
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище FitnesClubLeonModel.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище FitnesClubLeonModel.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище FitnesClubLeonModel.sp_dropdiagram" />
@@ -613,7 +535,105 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище FitnesClubLeonModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище FitnesClubLeonModel.sp_upgraddiagrams" />
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="FitnesClubLeonModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emplovee">
+            <EntityTypeMapping TypeName="FitnesClubLeonModel.Emplovee">
+              <MappingFragment StoreEntitySet="Emplovee">
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDEmployee" ColumnName="IDEmployee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="FitnesClubLeonModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="NameGender" ColumnName="NameGender" />
+                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="FitnesClubLeonModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="DateOrder" ColumnName="DateOrder" />
+                <ScalarProperty Name="IDEmployee" ColumnName="IDEmployee" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="FitnesClubLeonModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TimeService" ColumnName="TimeService" />
+                <ScalarProperty Name="DateService" ColumnName="DateService" />
+                <ScalarProperty Name="PriceService" ColumnName="PriceService" />
+                <ScalarProperty Name="NameService" ColumnName="NameService" />
+                <ScalarProperty Name="IDService" ColumnName="IDService" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FitnesClubLeonModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainer">
+            <EntityTypeMapping TypeName="FitnesClubLeonModel.Trainer">
+              <MappingFragment StoreEntitySet="Trainer">
+                <ScalarProperty Name="WorkExperience" ColumnName="WorkExperience" />
+                <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDTrainer" ColumnName="IDTrainer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderService">
+            <EntityTypeMapping TypeName="FitnesClubLeonModel.OrderService">
+              <MappingFragment StoreEntitySet="OrderService">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDService" ColumnName="IDService" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TrainerService" TypeName="FitnesClubLeonModel.TrainerService" StoreEntitySet="TrainerService">
+            <EndProperty Name="Trainer">
+              <ScalarProperty Name="IDTrainer" ColumnName="IDTrainer" />
+            </EndProperty>
+            <EndProperty Name="Service">
+              <ScalarProperty Name="IDService" ColumnName="IDService" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

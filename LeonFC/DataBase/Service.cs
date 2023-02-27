@@ -23,8 +23,11 @@ namespace LeonFC.DataBase
     
         public int IDService { get; set; }
         public string NameService { get; set; }
-        public string PriceService { get; set; }
+        public decimal PriceService { get; set; }
         public System.DateTime DateService { get; set; }
+        public int TimeService { get; set; }
+        public string Description { get; set; }
+        public byte[] Photo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderService> OrderService { get; set; }

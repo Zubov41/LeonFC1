@@ -18,8 +18,6 @@ namespace LeonFC
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    /// 123
-    /// 123
     public partial class MainWindow : Window
     {
         public MainWindow()

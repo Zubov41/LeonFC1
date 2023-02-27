@@ -1,0 +1,160 @@
+﻿<Window x:Class="LeonFC.Windows.RegistrationClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LeonFC.Windows"
+        mc:Ignorable="d"
+        Title="RegistrationClientWindow"
+        Height="1000"
+        Width="500"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel Margin="0,0,-247,0">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#7327e5" Offset="0"/>
+                    <GradientStop Color="#e0742c" Offset="0.632"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <TextBlock Text="Добавление клиента"
+                       FontSize="30"
+                       HorizontalAlignment="Center"
+                       Margin="0 30 0 0"/>
+
+            <TextBlock Text="Введите фамилию"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <TextBox x:Name="TbLastName"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+            <TextBlock Text="Введите фамилию"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <TextBox x:Name="TbLastName1"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+            <TextBlock Text="Введите имя"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <TextBox x:Name="TbFirstName"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+            <TextBlock Text="Введите отчество"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <TextBox x:Name="TbMiddleName"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+            <TextBlock Text="Введите адрес"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <TextBox x:Name="TbAddress"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+            <TextBlock Text="Введите телефон"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <TextBox x:Name="TbPhone"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+            <TextBlock Text="Введите серию паспорта"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <TextBox x:Name="TbSerPass"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+            <TextBlock Text="Введите номер паспорта"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <TextBox x:Name="TbNumberPass"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+
+            <TextBlock Text="Введите дату рождения"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <DatePicker x:Name="DPbDateOfBirth"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+
+            <TextBlock Text="Выберите пол"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="20 20 0 0"/>
+
+            <ComboBox x:Name="CMBGender"
+                     FontSize="18"
+                     HorizontalAlignment="Left"
+                     Margin="24 8 0 0"
+                     Width="250"
+                     Height="30"/>
+
+
+            <Button x:Name="BtnAddClient"
+                    Content="Добавить"
+                    FontSize="18"
+                    HorizontalAlignment="Center"
+                    Margin="0 100 0 0"
+                    Width="250"
+                    Height="30"
+                    Click="BtnAddClient_Click"/>
+
+
+        </StackPanel>
+    </Grid>
+</Window>
