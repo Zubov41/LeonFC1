@@ -21,4 +21,4 @@
 <br>
 <b> Окно "Список услуг" </b>
 <br>
-![image](https://user-images.githubusercontent.com/121236043/222431769-aa2ad18d-82aa-4163-809b-84a07d75baf4.png)
+![image](https://user-images.githubusercontent.com/121236043/222433498-284db9f1-16ed-40ea-bbc0-e50e898c9225.png)
