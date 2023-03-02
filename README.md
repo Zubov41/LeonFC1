@@ -1,5 +1,5 @@
 # ZubovAnvarovFitnessClub
-<b> Илья Зубов 3-ИСП9-19ВБ</b>
+<b> Алишер Анваров 3-ИСП9-19ВБ</b>
 <br>
 <b> БД </b>
 ![image](https://user-images.githubusercontent.com/121236043/221719124-f66fee28-3ac3-40bb-bdba-3d2924f76dcb.png)
