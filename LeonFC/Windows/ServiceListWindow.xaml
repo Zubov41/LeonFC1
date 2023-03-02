@@ -46,7 +46,7 @@
                                 <Image.Source>
                                     <Binding Path="Photo">
                                         <Binding.TargetNullValue>
-                                            <ImageSource>/Res/NullService.jpg</ImageSource>
+                                            <ImageSource>/Resources/NullService.jpg</ImageSource>
                                         </Binding.TargetNullValue>
                                     </Binding>
                                 </Image.Source>
