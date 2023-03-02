@@ -9,9 +9,11 @@
 ![image](https://user-images.githubusercontent.com/121236043/221719416-00011ab9-5c86-43a4-94c6-a9bcbf1abcbb.png)
 <br>
 <b>окно авторизации</b>
+<br>
 ![image](https://user-images.githubusercontent.com/121236043/221719674-889abdc0-b92d-4445-a120-6040dd1da0bd.png)
 <br>
 <b> Окно регистрации </b>
+<br>
 ![image](https://user-images.githubusercontent.com/121236043/221719792-40ae3554-51cd-4746-b850-1eb52ee028a4.png)
 <br>
 <b> Привязка БД к проекту </b>
