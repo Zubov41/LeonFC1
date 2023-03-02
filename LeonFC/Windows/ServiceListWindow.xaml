@@ -37,7 +37,7 @@
                     <Border BorderBrush="DarkSlateGray"
                             BorderThickness="1"
                             Width="200"
-                            Height="280"
+                            Height="320"
                             Margin="8">
                         <StackPanel>
                             <Image x:Name="ServiceImage"
@@ -65,6 +65,14 @@
 
                             <Button x:Name="BtnEditProduct"
                                     Content="Изменить"
+                                    FontSize="18"
+                                    Width="150"
+                                    Height="30"
+                                    Margin="10"
+                                    Click="BtnEditProduct_Click"/>
+                            
+                            <Button x:Name="BtnDelProduct"
+                                    Content="Удаление"
                                     FontSize="18"
                                     Width="150"
                                     Height="30"
