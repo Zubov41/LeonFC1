@@ -16,3 +16,6 @@
 <br>
 <b> Привязка БД к проекту </b>
 ![image](https://user-images.githubusercontent.com/121236043/221720406-adb95afe-b00a-4a2e-b3c3-44ecf098e2c4.png)
+<br>
+<b> Окно "Список услуг" </b>
+![image](https://user-images.githubusercontent.com/121236043/222431769-aa2ad18d-82aa-4163-809b-84a07d75baf4.png)
