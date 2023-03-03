@@ -36,6 +36,12 @@ namespace LeonFC.Windows
 
             serviceList = EFClass.context.Service.ToList();
 
+            // фильтрация, поиск и сортировку
+
+
+            //поиск
+            serviceList = serviceList.Where(i => i.NameService.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
+
             lvService.ItemsSource = serviceList;
         }
 
@@ -61,6 +67,11 @@ namespace LeonFC.Windows
             AddEditServiceWindow addEditServiceWindow = new AddEditServiceWindow(service);
             addEditServiceWindow.ShowDialog();
 
+            GetServiceList();
+        }
+
+        private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
             GetServiceList();
         }
     }
