@@ -22,3 +22,7 @@
 <b> Окно "Список услуг" </b>
 <br>
 ![image](https://user-images.githubusercontent.com/121236043/222433498-284db9f1-16ed-40ea-bbc0-e50e898c9225.png)
+<br>
+<b>Поискавая строка в главноем окне </b>
+<br>
+![image](https://user-images.githubusercontent.com/121236043/222654605-8354682a-af96-4be5-bb3d-c0696977f27e.png)
