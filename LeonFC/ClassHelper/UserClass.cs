@@ -8,6 +8,6 @@ namespace LeonFC.ClassHelper
 {
     public class UserClass
     {
-        public static DataBase.User AuthUser { get; set; }
+   
     }
 }
