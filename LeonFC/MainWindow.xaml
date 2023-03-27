@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <TextBlock x:Name="TxtNameUser"
+                   Text="Пользователь: "
+                   HorizontalAlignment="Right"
+                   Margin="16"
+                   FontSize="18"/>
     </Grid>
 </Window>
