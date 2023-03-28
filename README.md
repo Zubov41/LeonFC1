@@ -26,3 +26,8 @@
 <b>Поискавая строка в главноем окне </b>
 <br>
 ![image](https://user-images.githubusercontent.com/121236043/222654605-8354682a-af96-4be5-bb3d-c0696977f27e.png)
+<br>
+<b>Корзина</b>
+<br>
+![image](https://user-images.githubusercontent.com/121236043/228185573-31accf5e-a3ab-464f-a01b-8597ffee0cfe.png)
+<br>
