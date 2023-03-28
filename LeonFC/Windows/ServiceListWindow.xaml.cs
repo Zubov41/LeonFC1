@@ -23,10 +23,19 @@ namespace LeonFC.Windows
     /// </summary>
     public partial class ServiceListWindow : Window
     {
+        List<string> listSort = new List<string>()
+        {
+            "По умолчанию",
+            "По названию (по возрастанию)",
+            "По названию (по убыванию)"
+        };
         public ServiceListWindow()
         {
             InitializeComponent();
             GetServiceList();
+
+            CmbSort.ItemsSource = listSort;
+            CmbSort.SelectedIndex = 0;
 
         }
 
@@ -38,9 +47,9 @@ namespace LeonFC.Windows
 
             // фильтрация, поиск и сортировку
 
-
             //поиск
             serviceList = serviceList.Where(i => i.NameService.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
+
 
             // сортировка
             switch (CmbSort.SelectedIndex)

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +22,7 @@ namespace LeonFC
     {
         public MainWindow()
         {
-            InitializeComponent();
-            TxtNameUser.Text = "Пользователь " + ClassHelper.UserClass.AuthUser.Login + " " + ClassHelper.UserClass.AuthUser.Role.NameRole;
+         
         }
     }
 }

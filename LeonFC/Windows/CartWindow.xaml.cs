@@ -34,7 +34,7 @@ namespace LeonFC.Windows
                 return;
             }
 
-            var service = button.DataContext as DB.Service;
+            var service = button.DataContext as DataBase.Service;
             ClassHelper.CartClass.serviceCart.Remove(service);
         }
     }

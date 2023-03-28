@@ -64,7 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassHelper\CartClass.cs" />
     <Compile Include="ClassHelper\EFClass.cs" />
+    <Compile Include="ClassHelper\UserClass.cs" />
     <Compile Include="DataBase\Client.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -110,6 +112,7 @@
     <Compile Include="DataBase\Trainer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\User.cs" />
     <Compile Include="Windows\AddEditServiceWindow.xaml.cs">
       <DependentUpon>AddEditServiceWindow.xaml</DependentUpon>
     </Compile>
