@@ -10,11 +10,11 @@
 <br>
 <b>Окно авторизации</b>
 <br>
-![image](https://user-images.githubusercontent.com/121236043/231159176-946fec51-92fb-4eeb-a92f-973d6461b49e.png)
+![image](https://user-images.githubusercontent.com/121236043/231160552-5fd31ebf-2f79-45e0-a5bb-a29f8dcbe048.png)
 <br>
 <b> Окно регистрации </b>
 <br>
-![image](https://user-images.githubusercontent.com/121236043/231159268-65cfe49c-d161-4df4-a596-72273351f243.png)
+![image](https://user-images.githubusercontent.com/121236043/231160644-4f68091c-7171-4830-bac0-b9e79e213bc6.png)
 <br>
 <b> Привязка БД к проекту </b>
 ![image](https://user-images.githubusercontent.com/121236043/231159373-3afe58b7-e6c1-491f-9594-c620b2754eae.png)
